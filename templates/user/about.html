@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - MySystem</title>
+    <style>
+        .about-section {
+            padding: 50px 0;
+            text-align: center;
+        }
+        .about-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            color: #6c757d;
+            line-height: 1.6;
+        }
+        .about-history, .about-mission {
+            margin-bottom: 40px;
+        }
+        .contact-info {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+        .contact-info p {
+            margin: 5px 0;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .about-title {
+                font-size: 2rem;
+            }
+            .about-content {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    {% extends 'user/base.html' %}
+
+    {% block title %}About - MySystem{% endblock %}
+
+    {% block content %}
+        <section class="about-section">
+            <div class="container">
+                <h1 class="about-title">About MySystem</h1>
+                <div class="about-content">
+                    <div class="about-mission">
+                        <h3>Our Mission</h3>
+                        <p>At MySystem, we are dedicated to providing high-quality products and exceptional customer service. Our mission is to empower customers with a seamless shopping experience, offering a wide range of items at competitive prices while maintaining sustainability and innovation.</p>
+                    </div>
+                    <div class="about-history">
+                        <h3>Our History</h3>
+                        <p>Founded in 2020, MySystem started as a small online store in Vietnam. Over the years, we have grown into a trusted e-commerce platform, serving thousands of customers across the country. Our journey is driven by passion and a commitment to excellence.</p>
+                    </div>
+                    <div class="contact-info">
+                        <h3>Contact Us</h3>
+                        <p>Email: support@mysystem.com</p>
+                        <p>Phone: +84 123 456 789</p>
+                        <p>Address: 123 Le Loi St, Hanoi, Vietnam</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endblock %}
+</body>
+</html>

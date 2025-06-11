@@ -1,0 +1,35 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Manage Orders - MySystem{% endblock %}
+
+{% block content %}
+    <h1>Manage Orders</h1>
+    {% if orders %}
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Date</th>
+                    <th>Customer</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                    <tr>
+                        <td>{{ order.order_id }}</td>
+                        <td>{{ order.order_date }}</td>
+                        <td>{{ order.full_name }}</td>
+                        <td>${{ '%.2f' % order.total_amount }}</td>
+                        <td>
+                            <a href="{{ url_for('admin_order_details', order_id=order.order_id) }}" class="btn btn-info btn-sm">View</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No orders available.</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}MySystem{% endblock %}</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #446080;      /* Vibrant blue */
+            --secondary-color: #cfaecc;    /* Deep purple-blue */
+            --accent-color: #f72585;       /* Energetic pink */
+            --light-color: #f8fafb;        /* Light background */
+            --dark-color: #212529;         /* Dark text */
+            --success-color: #4cc9f0;     /* Teal for success */
+            --warning-color: #f8961e;      /* Orange for warnings */
+            --danger-color: #ef233c;      /* Red for errors */
+        }
+        
+        body {
+            background-color: rgb(238, 243, 247);
+            color: var(--dark-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand, .nav-link {
+            color: rgb(8, 8, 8) !important;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+        
+        .alert-success {
+            background-color: rgba(76, 201, 240, 0.1);
+            border-color: var(--success-color);
+            color: #f4f5f6;
+        }
+        
+        .alert-warning {
+            background-color: rgba(248, 150, 30, 0.1);
+            border-color: var(--warning-color);
+            color: #867b78;
+        }
+        
+        .alert-danger {
+            background-color: rgba(171, 136, 140, 0.1);
+            border-color: var(--danger-color);
+            color: #610404;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: rgb(17, 10, 10);
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .container {
+            background-color: rgb(217, 221, 225);
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    {% include 'shared/header.html' %}
+
+    <div class="container mt-4">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </div>
+
+    {% include 'shared/footer.html' %}
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

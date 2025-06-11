@@ -1,0 +1,44 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}{% if product %}Edit Product{% else %}Add Product{% endif %} - MySystem{% endblock %}
+
+{% block content %}
+    <h1>{% if product %}Edit Product{% else %}Add Product{% endif %}</h1>
+    <form method="POST" action="{{ url_for('admin_product_form') }}" enctype="multipart/form-data">
+        {% if product %}
+            <input type="hidden" name="product_id" value="{{ product.product_id }}">
+            <input type="hidden" name="existing_image" value="{{ product.image }}">
+        {% endif %}
+        <div class="form-group">
+            <label for="product_name">Product Name</label>
+            <input type="text" class="form-control" id="product_name" name="product_name" value="{{ product.product_name if product else '' }}" required>
+        </div>
+        <div class="form-group">
+            <label for="brand">Brand</label>
+            <input type="text" class="form-control" id="brand" name="brand" value="{{ product.brand if product else '' }}" required>
+        </div>
+        <div class="form-group">
+            <label for="category">Category</label>
+            <input type="text" class="form-control" id="category" name="category" value="{{ product.category if product else '' }}" required>
+        </div>
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input type="number" step="0.01" class="form-control" id="price" name="price" value="{{ product.price if product else '' }}" required>
+        </div>
+        <div class="form-group">
+            <label for="stock_quantity">Stock Quantity</label>
+            <input type="number" class="form-control" id="stock_quantity" name="stock_quantity" value="{{ product.stock_quantity if product else '' }}" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" id="description" name="description" rows="3">{{ product.description if product else '' }}</textarea>
+        </div>
+        <div class="mb-3">
+                <label>Image URL</label>
+                <input type="text" name="image" value="{{ product.image if product else '' }}" class="form-control" placeholder="Enter image URL (optional)">
+            </div>
+            <!-- <button type="submit" class="btn btn-primary">{{ action }}</button> -->
+            <a href="/products" class="btn btn-secondary">Back</a>
+        <button type="submit" class="btn btn-primary">Save Product</button>
+    </form>
+{% endblock %}

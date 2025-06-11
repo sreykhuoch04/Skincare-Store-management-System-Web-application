@@ -1,0 +1,30 @@
+{% extends 'user/base.html' %}
+
+{% block title %}{{ product.product_name }} - MySystem{% endblock %}
+
+{% block content %}
+    <h1>{{ product.product_name }}</h1>
+    <div class="row">
+        <div class="col-md-6">
+            {% if product.image %}
+                <img src="{{ url_for('static', filename=product.image.split('static/')[1]) }}" class="img-fluid" alt="{{ product.product_name }}" style="max-height: 400px; object-fit: cover;">
+            {% else %}
+                <img src="https://via.placeholder.com/400" class="img-fluid" alt="No image" style="max-height: 400px; object-fit: cover;">
+            {% endif %}
+        </div>
+        <div class="col-md-6">
+            <p><strong>Brand:</strong> {{ product.brand }}</p>
+            <p><strong>Category:</strong> {{ product.category }}</p>
+            <p><strong>Price:</strong> ${{ '%.2f' % product.price }}</p>
+            <p><strong>Stock:</strong> {{ product.stock_quantity }} available</p>
+            <p><strong>Description:</strong> {{ product.description }}</p>
+            <form method="POST" action="{{ url_for('add_to_cart', product_id=product.product_id) }}">
+                <div class="form-group">
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" class="form-control" id="quantity" name="quantity" value="1" min="1" max="{{ product.stock_quantity }}">
+                </div>
+                <button type="submit" class="btn btn-primary">Add to Cart</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

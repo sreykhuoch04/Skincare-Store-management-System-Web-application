@@ -1,0 +1,33 @@
+{% extends 'user/base.html' %}
+
+{% block title %}Order Confirmation - MySystem{% endblock %}
+
+{% block content %}
+    <h1>Order Confirmation</h1>
+    <p>Thank you for your order, {{ order.full_name }}!</p>
+    <p><strong>Order ID:</strong> {{ order.order_id }}</p>
+    <p><strong>Order Date:</strong> {{ order.order_date }}</p>
+    <p><strong>Total Amount:</strong> ${{ '%.2f' % order.total_amount }}</p>
+    <h3>Order Items</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+                <tr>
+                    <td>{{ item.product_name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>${{ '%.2f' % item.price }}</td>
+                    <td>${{ '%.2f' % (item.price * item.quantity) }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ url_for('products') }}" class="btn btn-primary">Continue Shopping</a>
+{% endblock %}

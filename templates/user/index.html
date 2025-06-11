@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - MySystem</title>
+    <style>
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #6b48ff 0%, #00c4b4 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/white-diamond.png');
+            opacity: 0.1;
+        }
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        .search-bar {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .search-bar .form-control {
+            border-radius: 50px 0 0 50px;
+            border: none;
+            padding: 10px 20px;
+        }
+        .search-bar .btn {
+            border-radius: 0 50px 50px 0;
+            background-color: #ff6f61;
+            border: none;
+            padding: 10px 20px;
+            transition: background-color 0.3s;
+        }
+        .search-bar .btn:hover {
+            background-color: #ff4f41;
+        }
+        .about-link {
+            color: white;
+            text-decoration: underline;
+            font-size: 1rem;
+            margin-top: 10px;
+            display: inline-block;
+            transition: color 0.3s;
+        }
+        .about-link:hover {
+            color: #ff6f61;
+        }
+
+        /* Featured Products Section */
+        .featured-products {
+            padding: 50px 0;
+        }
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 40px;
+            text-align: center;
+            color: #333;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            width: 50px;
+            height: 3px;
+            background-color: #6b48ff;
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .product-card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .product-details {
+            padding: 15px;
+            text-align: center;
+        }
+        .product-name {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .product-price {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ff6f61;
+            margin-bottom: 15px;
+        }
+        .btn-view-details {
+            background-color: #6b48ff;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 20px;
+            transition: background-color 0.3s;
+        }
+        .btn-view-details:hover {
+            background-color: #5a3de6;
+        }
+
+        /* Location Section */
+        .location-section {
+            background-color: #f8f9fa;
+            padding: 50px 0;
+            text-align: center;
+        }
+        .location-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .location-details {
+            font-size: 1.1rem;
+            color: #6c757d;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .location-map {
+            margin-top: 20px;
+        }
+        .location-map img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+            .location-details {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    {% extends 'user/base.html' %}
+
+    {% block title %}Home - MySystem{% endblock %}
+
+    {% block content %}
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container position-relative">
+                <h1 class="hero-title">Welcome to MySystem</h1>
+                <p class="hero-subtitle">Discover amazing products at unbeatable prices!</p>
+                <form method="GET" action="{{ url_for('product_search') }}" class="search-bar">
+                    <div class="input-group">
+                        <input type="text" name="query" class="form-control" placeholder="Search for products..." required>
+                        <div class="input-group-append">
+                            <button class="btn" type="submit"><i class="fas fa-search"></i> Search</button>
+                        </div>
+                    </div>
+                </form>
+                <a href="{{ url_for('about') }}" class="about-link">Learn more about us</a>
+            </div>
+        </section>
+
+        <!-- Featured Products Section -->
+        <section class="featured-products">
+            <div class="container">
+                <h2 class="section-title">Featured Products</h2>
+                <div class="product-grid">
+                    {% for product in featured_products %}
+                        <div class="product-card">
+                            <img src="{{ product.image if product.image else 'https://via.placeholder.com/200' }}" alt="{{ product.product_name }}" class="product-image">
+                            <div class="product-details">
+                                <h3 class="product-name">{{ product.product_name }}</h3>
+                                <p class="product-price">${{ '%.2f'|format(product.price) }}</p>
+                                <a href="{{ url_for('product_details', product_id=product.product_id) }}" class="btn btn-view-details">View Details</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <!-- Location Section -->
+        <section class="location-section">
+            <div class="container">
+                <h2 class="location-title">Our Locations</h2>
+                <div class="location-details">
+                    Visit us at our stores or shop online! We are located in:
+                    <ul style="text-align: left; display: inline-block;">
+                        <li>Hanoi, Vietnam - 123 Le Loi St</li>
+                        <li>Ho Chi Minh City, Vietnam - 456 Nguyen Hue St</li>
+                        <li>Contact us: +84 123 456 789 | support@mysystem.com</li>
+                    </ul>
+                </div>
+                <div class="location-map">
+                    <img src="https://via.placeholder.com/600x300" alt="Store Locations Map">
+                </div>
+            </div>
+        </section>
+    {% endblock %}
+</body>
+</html>
